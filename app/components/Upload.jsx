@@ -1,5 +1,6 @@
 const React = require('react');
 const axios = require('axios');
+const Dropzone = require('./Dropzone.jsx');
 
 class Upload extends React.Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class Upload extends React.Component {
   render() {
     return (
         <div>
-          UPLOAD!
+          UPLOAD! <br/>
+          <Dropzone filename="file.jpg" fileid="1"/>
         </div>
       );
   }

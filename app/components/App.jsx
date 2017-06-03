@@ -11,7 +11,7 @@ class App extends React.Component {
   render() {
     return (
         <div>
-          Hello!
+          <a href="/upload">Upload a new Image</a>
         </div>
       );
   }
