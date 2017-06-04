@@ -37,6 +37,10 @@ var Dropzone = React.createClass({
       alert('Please enter a caption!');
       return;
     }
+    if(document.getElementById('hashtags').value === '') {
+      alert('Please enter some hashtags!');
+      return;
+    }
     if(file.length === 0) return;
     if(file[0].size > 2000000) {
       alert('Sorry, but the maximum file upload size is 2 MB.');
@@ -48,7 +52,13 @@ var Dropzone = React.createClass({
     }
     const context = this;
     var fileData = new FormData();
-    var options = JSON.stringify({fileName: file[0].name, username: document.getElementById('username').value, caption: document.getElementById('caption').value});
+    var hashtags = document.getElementById('hashtags').value.split(',').map(function(hashtag) {
+      return hashtag.trim();
+    });
+    console.log(hashtags);
+    hashtags = JSON.stringify(hashtags);
+    console.log(hashtags);
+    var options = JSON.stringify({fileName: file[0].name, username: document.getElementById('username').value, caption: document.getElementById('caption').value, hashtags: hashtags});
     fileData.append('file', file[0]);
     fileData.append('opts', options);
 

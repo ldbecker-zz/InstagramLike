@@ -26,12 +26,18 @@ router.post('/uploadHandler', upload.single('file'), function(req, res) {
   models.Images.create({
     filename: opts.fileName,
     uploader: opts.username,
-    caption: opts.caption
+    caption: opts.caption,
+    hashtags: opts.hashtags
   }).then(function(resp) {
     res.status(200).send(resp);
   }).catch(function(resp) {
     res.status(500).send(resp);
   })
+});
+
+router.post('/search', function(req, res, next) {
+  //if search query is empty, just get 10 newest images.
+
 });
 
 module.exports = router;

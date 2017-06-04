@@ -3,7 +3,8 @@ module.exports = function(sequelize, DataTypes) {
   var Images = sequelize.define('Images', {
     filename: DataTypes.STRING,
     uploader: DataTypes.STRING,
-    caption: DataTypes.STRING
+    caption: DataTypes.STRING,
+    hashtags: DataTypes.STRING
   }, {
     timestamps: false,
     classMethods: {

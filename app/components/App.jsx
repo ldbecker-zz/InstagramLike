@@ -6,12 +6,23 @@ const Upload = require('./Upload.jsx');
 class App extends React.Component {
 	constructor(props) {
     super(props);
+
+    this.state = {
+      images: []
+    };
   }
 
   render() {
     return (
         <div>
-          <a href="/upload">Upload a new Image</a>
+          <a href="/upload">Upload a new Image</a><br/><br/>
+          <div id="images">
+            {this.state.images.length === 0 ? 
+              <div>No images to Display</div> 
+              :
+              <div>Here be images!</div>
+            }
+          </div>
         </div>
       );
   }
