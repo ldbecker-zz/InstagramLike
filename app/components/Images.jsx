@@ -20,7 +20,7 @@ class Images extends React.Component {
   render() {
     return (
         <div className="images">
-          IMAGES<br/>
+          IMAGES!<br/>
           {this.state.images.map(function(image) {
             return (
                 <Image image={image}/>
