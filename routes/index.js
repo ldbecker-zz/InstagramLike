@@ -37,7 +37,12 @@ router.post('/uploadHandler', upload.single('file'), function(req, res) {
 
 router.post('/search', function(req, res, next) {
   //if search query is empty, just get 10 newest images.
-
+  var query = req.body.query;
+  if(query === '') {
+    
+  } else {
+    
+  }
 });
 
 module.exports = router;
