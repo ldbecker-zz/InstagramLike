@@ -2,6 +2,7 @@ import { Router, Route, browserHistory } from 'react-router';
 const React = require('react');
 const ReactDOM = require('react-dom');
 const Upload = require('./Upload.jsx');
+const Images = require('./Images.jsx');
 const axios = require('axios');
 
 class App extends React.Component {
@@ -12,14 +13,17 @@ class App extends React.Component {
       images: []
     };
 
+    this.doQuery = this.doQuery.bind(this);
     this.doQuery('');
   }
 
   doQuery(query) {
+    let context = this;
     axios.post('/search', {query : query})
     .then(function(resp) {
-      console.log(resp);
-      alert('!');
+      context.setState({
+        images: resp.data
+      });
     });
   }
 
@@ -31,7 +35,7 @@ class App extends React.Component {
             {this.state.images.length === 0 ? 
               <div>No images to Display</div> 
               :
-              <div>Here be images!</div>
+              <Images images={this.state.images}/>
             }
           </div>
         </div>

@@ -6,3 +6,18 @@ body {
 a {
   color: #00B7FF;
 }
+
+.image {
+  border-style: groove;
+  display: inline-block;
+  width:75%;
+}
+
+.images {
+	text-align: center;
+	width: 100%;
+}
+
+.pic {
+	width: inherit;
+}
