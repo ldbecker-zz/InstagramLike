@@ -2,7 +2,15 @@ var express = require('express');
 var router = express.Router();
 const models = require('../models');
 const multer = require('multer');
-var upload = multer({dest: './public/files'});
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/files')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+var upload = multer({ storage: storage });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,7 +22,16 @@ router.get('/upload', function(req, res, next) {
 });
 
 router.post('/uploadHandler', upload.single('file'), function(req, res) {
-  res.status(200).send({msg: "done"});
+  var opts = JSON.parse(req.body.opts);
+  models.Images.create({
+    filename: opts.fileName,
+    uploader: opts.username,
+    caption: opts.caption
+  }).then(function(resp) {
+    res.status(200).send(resp);
+  }).catch(function(resp) {
+    res.status(500).send(resp);
+  })
 });
 
 module.exports = router;

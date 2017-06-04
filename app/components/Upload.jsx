@@ -15,7 +15,10 @@ class Upload extends React.Component {
   render() {
     return (
         <div>
-          UPLOAD! <br/>
+          Please enter your Username and Caption below. <br/>
+          Then drag your image to the dropzone or click the dropzone to select your image. <br/>
+          Your Username: <input id="username" type="text"></input><br/>
+          Your Caption: <input id="caption" type="text"></input><br/>
           <Dropzone filename="file.jpg" fileid="1"/>
         </div>
       );

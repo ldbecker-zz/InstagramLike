@@ -29,18 +29,26 @@ var Dropzone = React.createClass({
   },
 
   dropHandler: function(file, filerej) {
+    if(document.getElementById('username').value === '') {
+      alert('Please enter your username!');
+      return;
+    }
+    if(document.getElementById('caption').value === '') {
+      alert('Please enter a caption!');
+      return;
+    }
     if(file.length === 0) return;
     if(file[0].size > 2000000) {
       alert('Sorry, but the maximum file upload size is 2 MB.');
       return;
     }
-    if(file[0].name !== this.state.filename) {
-      alert('Invalid file name. Please select ' + this.state.filename);
+    if(!(file[0].name.toLowerCase().endsWith('.jpg') || file[0].name.toLowerCase().endsWith('.jpeg') || file[0].name.toLowerCase().endsWith('.gif') || file[0].name.toLowerCase().endsWith('.png'))) {
+      alert('Invalid file type. Please select an image.');
       return;
     }
     const context = this;
     var fileData = new FormData();
-    var options = JSON.stringify({fileName: file[0].name, size:file[0].size, fileid: this.state.fileid});
+    var options = JSON.stringify({fileName: file[0].name, username: document.getElementById('username').value, caption: document.getElementById('caption').value});
     fileData.append('file', file[0]);
     fileData.append('opts', options);
 
@@ -48,7 +56,8 @@ var Dropzone = React.createClass({
       .send(fileData)
       .end(function(err, resp) {
         if(err) {console.error(err);}
-        alert('Phase 2 complete. To view file details, hit the refresh button then select it below.');
+        console.log(resp);
+        alert('Upload Complete');
         return resp;
       });
   }
