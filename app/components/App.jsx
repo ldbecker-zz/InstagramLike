@@ -2,6 +2,7 @@ import { Router, Route, browserHistory } from 'react-router';
 const React = require('react');
 const ReactDOM = require('react-dom');
 const Upload = require('./Upload.jsx');
+const axios = require('axios');
 
 class App extends React.Component {
 	constructor(props) {
@@ -10,6 +11,16 @@ class App extends React.Component {
     this.state = {
       images: []
     };
+
+    this.doQuery('');
+  }
+
+  doQuery(query) {
+    axios.post('/search', {query : query})
+    .then(function(resp) {
+      console.log(resp);
+      alert('!');
+    });
   }
 
   render() {

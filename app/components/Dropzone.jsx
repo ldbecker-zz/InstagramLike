@@ -53,7 +53,9 @@ var Dropzone = React.createClass({
     const context = this;
     var fileData = new FormData();
     var hashtags = document.getElementById('hashtags').value.split(',').map(function(hashtag) {
-      return hashtag.trim();
+      hashtag = hashtag.trim();
+      if(hashtag.startsWith('#')) hashtag = hashtag.slice(1);
+      return hashtag;
     });
     console.log(hashtags);
     hashtags = JSON.stringify(hashtags);

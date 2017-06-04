@@ -39,9 +39,16 @@ router.post('/search', function(req, res, next) {
   //if search query is empty, just get 10 newest images.
   var query = req.body.query;
   if(query === '') {
-    
+    models.Images.findAll({
+      limit: 10,
+      order: [['id', 'DESC']]
+    }).then(function(resp) {
+      res.status(200).send(resp);
+    }).catch(function(resp) {
+      res.status(500).send(resp);
+    })
   } else {
-    
+
   }
 });
 
