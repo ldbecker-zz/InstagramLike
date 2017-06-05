@@ -41,7 +41,7 @@ class App extends React.Component {
           <form onSubmit={this.handleSubmit}>
             Search Term: <input id="query" type="text"></input><br/>
             Note: To search for a hashtag, start your term with a "#". To search for a user, start your term with "@"<br/>
-            An empty search term brings up the 10 latest images. <br/>
+            Searches the caption by default. An empty search term brings up the 10 latest images. <br/>
             <button type="submit">Search</button>
           </form>
           <div id="images">

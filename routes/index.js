@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const models = require('../models');
+const Sequelize = require('sequelize');
 const multer = require('multer');
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -59,7 +60,17 @@ router.post('/search', function(req, res, next) {
       res.status(500).send(resp);
     })
   } else if (query.startsWith('#')) {
-
+    models.Images.findAll({
+      order: [['id', 'DESC']],
+      where: Sequelize.where(
+          Sequelize.fn("INSTR", Sequelize.col('hashtags'), '\"' + query.slice(1) + '\"'),
+          { $gt: 0 }
+        )
+    }).then(function(resp) {
+      res.status(200).send(resp);
+    }).catch(function(resp) {
+      res.status(500).send(resp);
+    })
   }
 });
 
