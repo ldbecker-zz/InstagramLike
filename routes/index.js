@@ -86,4 +86,30 @@ router.post('/search', function(req, res, next) {
   }
 });
 
+router.get('/comments/:id', function(req, res, next) {
+  var id = req.params.id
+  models.Comments.findAll({
+    order: [['id', 'DESC']],
+    where: {
+      imageid: id
+    }
+  }).then(function(resp) {
+    res.status(200).send(resp);
+  }).catch(function(resp) {
+    res.status(500).send(resp);
+  });
+});
+
+router.post('/newComment', function(req, res, next) {
+  models.Comments.create({
+    uploader: req.body.uploader,
+    comment: req.body.comment,
+    imageid: req.body.imageid
+  }).then(function(resp) {
+    res.status(200).send(resp);
+  }).catch(function(resp) {
+    res.status(500).send(resp);
+  });
+});
+
 module.exports = router;

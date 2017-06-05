@@ -11,6 +11,8 @@ a {
   border-style: groove;
   display: inline-block;
   width:75%;
+  text-align:center;
+  border-radius: 10px;
 }
 
 .images {
@@ -20,4 +22,11 @@ a {
 
 .pic {
 	width: inherit;
+}
+
+.comment {
+	text-align: center;
+	border-style: groove;
+	border-radius: 10px;
+	width: 100%;
 }

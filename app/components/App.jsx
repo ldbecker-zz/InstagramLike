@@ -30,7 +30,6 @@ class App extends React.Component {
       context.setState({
         images: resp.data
       });
-      console.log(resp);
     });
   }
 
