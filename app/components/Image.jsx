@@ -14,7 +14,6 @@ class Image extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     this.setState({
       filename: nextProps.image.filename,
       uploader: nextProps.image.uploader,

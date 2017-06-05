@@ -33,7 +33,7 @@ router.post('/uploadHandler', upload.single('file'), function(req, res) {
     res.status(200).send(resp);
   }).catch(function(resp) {
     res.status(500).send(resp);
-  })
+  });
 });
 
 router.post('/search', function(req, res, next) {
@@ -47,7 +47,7 @@ router.post('/search', function(req, res, next) {
       res.status(200).send(resp);
     }).catch(function(resp) {
       res.status(500).send(resp);
-    })
+    });
   } else if (query.startsWith('@')) {
     models.Images.findAll({
       order: [['id', 'DESC']],
@@ -58,7 +58,7 @@ router.post('/search', function(req, res, next) {
       res.status(200).send(resp);
     }).catch(function(resp) {
       res.status(500).send(resp);
-    })
+    });
   } else if (query.startsWith('#')) {
     models.Images.findAll({
       order: [['id', 'DESC']],
@@ -70,7 +70,19 @@ router.post('/search', function(req, res, next) {
       res.status(200).send(resp);
     }).catch(function(resp) {
       res.status(500).send(resp);
-    })
+    });
+  } else {
+    models.Images.findAll({
+      order: [['id', 'DESC']],
+      where: Sequelize.where(
+          Sequelize.fn("INSTR", Sequelize.col("caption"), query),
+          { $gt: 0 }
+        )
+    }).then(function(resp) {
+      res.status(200).send(resp);
+    }).catch(function(resp) {
+      res.status(500).send(resp);
+    });
   }
 });
 

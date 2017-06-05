@@ -12,7 +12,6 @@ class Images extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     this.setState({
       images: nextProps.images
     });
@@ -21,7 +20,7 @@ class Images extends React.Component {
   render() {
     return (
         <div className="images">
-          IMAGES!<br/>
+          {this.state.images.length + " Images Found."}<br/>
           {this.state.images.map(function(image) {
             return (
                 <Image image={image}/>
