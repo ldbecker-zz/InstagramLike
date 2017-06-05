@@ -57,9 +57,7 @@ var Dropzone = React.createClass({
       if(hashtag.startsWith('#')) hashtag = hashtag.slice(1);
       return hashtag;
     });
-    console.log(hashtags);
     hashtags = JSON.stringify(hashtags);
-    console.log(hashtags);
     var options = JSON.stringify({fileName: file[0].name, username: document.getElementById('username').value, caption: document.getElementById('caption').value, hashtags: hashtags});
     fileData.append('file', file[0]);
     fileData.append('opts', options);
@@ -68,7 +66,6 @@ var Dropzone = React.createClass({
       .send(fileData)
       .end(function(err, resp) {
         if(err) {console.error(err);}
-        console.log(resp);
         alert('Upload Complete');
         return resp;
       });
