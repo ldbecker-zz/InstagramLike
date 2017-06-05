@@ -14,7 +14,13 @@ class App extends React.Component {
     };
 
     this.doQuery = this.doQuery.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.doQuery('');
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.doQuery(document.getElementById('query').value);
   }
 
   doQuery(query) {
@@ -24,6 +30,7 @@ class App extends React.Component {
       context.setState({
         images: resp.data
       });
+      console.log(resp);
     });
   }
 
@@ -31,6 +38,12 @@ class App extends React.Component {
     return (
         <div>
           <a href="/upload">Upload a new Image</a><br/><br/>
+          <form onSubmit={this.handleSubmit}>
+            Search Term: <input id="query" type="text"></input><br/>
+            Note: To search for a hashtag, start your term with a "#". To search for a user, start your term with "@"<br/>
+            An empty search term brings up the 10 latest images. <br/>
+            <button type="submit">Search</button>
+          </form>
           <div id="images">
             {this.state.images.length === 0 ? 
               <div>No images to Display</div> 

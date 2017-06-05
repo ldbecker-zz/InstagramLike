@@ -47,7 +47,18 @@ router.post('/search', function(req, res, next) {
     }).catch(function(resp) {
       res.status(500).send(resp);
     })
-  } else {
+  } else if (query.startsWith('@')) {
+    models.Images.findAll({
+      order: [['id', 'DESC']],
+      where: {
+        uploader: query.slice(1)
+      }
+    }).then(function(resp) {
+      res.status(200).send(resp);
+    }).catch(function(resp) {
+      res.status(500).send(resp);
+    })
+  } else if (query.startsWith('#')) {
 
   }
 });

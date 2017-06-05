@@ -12,6 +12,7 @@ class Images extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     this.setState({
       images: nextProps.images
     });
